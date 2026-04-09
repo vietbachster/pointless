@@ -178,10 +178,10 @@ void waitForPowerRelease() {
 }
 
 // Enter deep sleep mode
-void enterDeepSleep(bool isManualSleep) {
+void enterDeepSleep() {
   HalPowerManager::Lock powerLock;  // Ensure we are at normal CPU frequency for sleep preparation
   APP_STATE.lastSleepFromReader = activityManager.isReaderActivity();
-  APP_STATE.resumeReaderOnWake = isManualSleep && APP_STATE.lastSleepFromReader;
+  APP_STATE.resumeReaderOnWake = APP_STATE.lastSleepFromReader;
   APP_STATE.saveToFile();
 
   activityManager.goToSleep();
@@ -365,7 +365,7 @@ void loop() {
   const unsigned long sleepTimeoutMs = SETTINGS.getSleepTimeoutMs();
   if (millis() - lastActivityTime >= sleepTimeoutMs) {
     LOG_DBG("SLP", "Auto-sleep triggered after %lu ms of inactivity", sleepTimeoutMs);
-    enterDeepSleep(false);
+    enterDeepSleep();
     // This should never be hit as `enterDeepSleep` calls esp_deep_sleep_start
     return;
   }
@@ -375,7 +375,7 @@ void loop() {
     if (gpio.isPressed(HalGPIO::BTN_DOWN)) {
       return;
     }
-    enterDeepSleep(true);
+    enterDeepSleep();
     // This should never be hit as `enterDeepSleep` calls esp_deep_sleep_start
     return;
   }
