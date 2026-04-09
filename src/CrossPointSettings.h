@@ -187,8 +187,6 @@ class CrossPointSettings {
   char opdsPassword[64] = "";
   // Hide battery percentage
   uint8_t hideBatteryPercentage = HIDE_NEVER;
-  // Long-press chapter skip on side buttons
-  uint8_t longPressChapterSkip = 1;
   // UI Theme
   uint8_t uiTheme = LYRA;
   // Sunlight fading compensation
