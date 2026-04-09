@@ -16,6 +16,11 @@
 
 void SleepActivity::onEnter() {
   Activity::onEnter();
+
+  if (APP_STATE.resumeReaderOnWake) {
+    return renderReaderBookmarkSleepScreen();
+  }
+
   GUI.drawPopup(renderer, tr(STR_ENTERING_SLEEP));
 
   switch (SETTINGS.sleepScreen) {
@@ -29,6 +34,37 @@ void SleepActivity::onEnter() {
     default:
       return renderDefaultSleepScreen();
   }
+}
+
+void SleepActivity::renderReaderBookmarkSleepScreen() const {
+  const int pageWidth = renderer.getScreenWidth();
+
+  constexpr int bookmarkWidth = 36;
+  constexpr int bookmarkHeight = 60;
+  constexpr int bookmarkRightOffset = 36;
+  constexpr int notchDepth = 18;
+  const int bookmarkX = pageWidth - bookmarkRightOffset - bookmarkWidth;
+  constexpr int bookmarkY = 0;
+  const int centerX = bookmarkX + bookmarkWidth / 2;
+
+  const int xPoints[5] = {
+      bookmarkX,                  // top-left
+      bookmarkX + bookmarkWidth,  // top-right
+      bookmarkX + bookmarkWidth,  // bottom-right
+      centerX,                    // center notch point
+      bookmarkX                   // bottom-left
+  };
+  const int yPoints[5] = {
+      bookmarkY,                              // top-left
+      bookmarkY,                              // top-right
+      bookmarkY + bookmarkHeight,             // bottom-right
+      bookmarkY + bookmarkHeight - notchDepth,  // center notch point
+      bookmarkY + bookmarkHeight              // bottom-left
+  };
+
+  // Keep the current reading page visible and only add a small bookmark marker.
+  renderer.fillPolygon(xPoints, yPoints, 5, true);
+  renderer.displayBuffer(HalDisplay::HALF_REFRESH);
 }
 
 void SleepActivity::renderCustomSleepScreen() const {

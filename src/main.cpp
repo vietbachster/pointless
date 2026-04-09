@@ -178,9 +178,10 @@ void waitForPowerRelease() {
 }
 
 // Enter deep sleep mode
-void enterDeepSleep() {
+void enterDeepSleep(bool isManualSleep) {
   HalPowerManager::Lock powerLock;  // Ensure we are at normal CPU frequency for sleep preparation
   APP_STATE.lastSleepFromReader = activityManager.isReaderActivity();
+  APP_STATE.resumeReaderOnWake = isManualSleep && APP_STATE.lastSleepFromReader;
   APP_STATE.saveToFile();
 
   activityManager.goToSleep();
@@ -290,9 +291,9 @@ void setup() {
   APP_STATE.loadFromFile();
   RECENT_BOOKS.loadFromFile();
 
-  // Boot to home screen if no book is open, last sleep was not from reader, back button is held, or reader activity
-  // crashed (indicated by readerActivityLoadCount > 0)
-  if (APP_STATE.openEpubPath.empty() || !APP_STATE.lastSleepFromReader ||
+  // Boot to home screen if no book is open, reader resume was not explicitly requested,
+  // back button is held, or reader activity crashed (indicated by readerActivityLoadCount > 0)
+  if (APP_STATE.openEpubPath.empty() || !APP_STATE.resumeReaderOnWake ||
       mappedInputManager.isPressed(MappedInputManager::Button::Back) || APP_STATE.readerActivityLoadCount > 0) {
     activityManager.goHome();
   } else {
@@ -364,7 +365,7 @@ void loop() {
   const unsigned long sleepTimeoutMs = SETTINGS.getSleepTimeoutMs();
   if (millis() - lastActivityTime >= sleepTimeoutMs) {
     LOG_DBG("SLP", "Auto-sleep triggered after %lu ms of inactivity", sleepTimeoutMs);
-    enterDeepSleep();
+    enterDeepSleep(false);
     // This should never be hit as `enterDeepSleep` calls esp_deep_sleep_start
     return;
   }
@@ -374,7 +375,7 @@ void loop() {
     if (gpio.isPressed(HalGPIO::BTN_DOWN)) {
       return;
     }
-    enterDeepSleep();
+    enterDeepSleep(true);
     // This should never be hit as `enterDeepSleep` calls esp_deep_sleep_start
     return;
   }
