@@ -21,7 +21,6 @@
 #include "fontIds.h"
 
 namespace {
-constexpr unsigned long skipPageMs = 700;
 constexpr unsigned long goHomeMs = 1000;
 }  // namespace
 
@@ -80,19 +79,12 @@ void XtcReaderActivity::loop() {
     return;
   }
 
-  // When long-press chapter skip is disabled, turn pages on press instead of release.
-  const bool usePressForPageTurn = !SETTINGS.longPressChapterSkip;
-  const bool prevTriggered = usePressForPageTurn ? (mappedInput.wasPressed(MappedInputManager::Button::PageBack) ||
-                                                    mappedInput.wasPressed(MappedInputManager::Button::Left))
-                                                 : (mappedInput.wasReleased(MappedInputManager::Button::PageBack) ||
-                                                    mappedInput.wasReleased(MappedInputManager::Button::Left));
+  const bool prevTriggered = mappedInput.wasReleased(MappedInputManager::Button::PageBack) ||
+                             mappedInput.wasReleased(MappedInputManager::Button::Left);
   const bool powerPageTurn = SETTINGS.shortPwrBtn == CrossPointSettings::SHORT_PWRBTN::PAGE_TURN &&
                              mappedInput.wasReleased(MappedInputManager::Button::Power);
-  const bool nextTriggered = usePressForPageTurn
-                                 ? (mappedInput.wasPressed(MappedInputManager::Button::PageForward) || powerPageTurn ||
-                                    mappedInput.wasPressed(MappedInputManager::Button::Right))
-                                 : (mappedInput.wasReleased(MappedInputManager::Button::PageForward) || powerPageTurn ||
-                                    mappedInput.wasReleased(MappedInputManager::Button::Right));
+  const bool nextTriggered = mappedInput.wasReleased(MappedInputManager::Button::PageForward) || powerPageTurn ||
+                             mappedInput.wasReleased(MappedInputManager::Button::Right);
 
   if (!prevTriggered && !nextTriggered) {
     return;
@@ -109,8 +101,7 @@ void XtcReaderActivity::loop() {
     return;
   }
 
-  const bool skipPages = SETTINGS.longPressChapterSkip && mappedInput.getHeldTime() > skipPageMs;
-  const int skipAmount = skipPages ? 10 : 1;
+  constexpr int skipAmount = 1;
 
   if (prevTriggered) {
     if (currentPage >= static_cast<uint32_t>(skipAmount)) {
