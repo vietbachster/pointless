@@ -256,7 +256,7 @@ void setup() {
   HalSystem::clearPanic();  // TODO: move this to an activity when we have one to display the panic info
 
   SETTINGS.loadFromFile();
-  I18N.loadSettings();
+  // English-only UI: do not load persisted language preferences.
   KOREADER_STORE.loadFromFile();
   UITheme::getInstance().reload();
   ButtonNavigator::setMappedInputManager(mappedInputManager);
