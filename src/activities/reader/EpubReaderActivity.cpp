@@ -21,6 +21,7 @@
 #include "QrDisplayActivity.h"
 #include "ReaderUtils.h"
 #include "RecentBooksStore.h"
+#include "components/UITheme.h"
 #include "fontIds.h"
 #include "util/ScreenshotUtil.h"
 
