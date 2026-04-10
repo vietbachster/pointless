@@ -286,8 +286,6 @@ void setup() {
 
   setupDisplayAndFonts();
 
-  activityManager.goToBoot();
-
   APP_STATE.loadFromFile();
   RECENT_BOOKS.loadFromFile();
 
