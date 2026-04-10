@@ -1,4 +1,4 @@
-#include "CalibreSettingsActivity.h"
+#include "OpdsSettingsActivity.h"
 
 #include <GfxRenderer.h>
 #include <I18n.h>
@@ -13,19 +13,19 @@
 
 namespace {
 constexpr int MENU_ITEMS = 3;
-const StrId menuNames[MENU_ITEMS] = {StrId::STR_CALIBRE_WEB_URL, StrId::STR_USERNAME, StrId::STR_PASSWORD};
+const StrId menuNames[MENU_ITEMS] = {StrId::STR_OPDS_SERVER_URL, StrId::STR_USERNAME, StrId::STR_PASSWORD};
 }  // namespace
 
-void CalibreSettingsActivity::onEnter() {
+void OpdsSettingsActivity::onEnter() {
   Activity::onEnter();
 
   selectedIndex = 0;
   requestUpdate();
 }
 
-void CalibreSettingsActivity::onExit() { Activity::onExit(); }
+void OpdsSettingsActivity::onExit() { Activity::onExit(); }
 
-void CalibreSettingsActivity::loop() {
+void OpdsSettingsActivity::loop() {
   if (mappedInput.wasPressed(MappedInputManager::Button::Back)) {
     finish();
     return;
@@ -48,10 +48,10 @@ void CalibreSettingsActivity::loop() {
   });
 }
 
-void CalibreSettingsActivity::handleSelection() {
+void OpdsSettingsActivity::handleSelection() {
   if (selectedIndex == 0) {
     // OPDS Server URL
-    startActivityForResult(std::make_unique<KeyboardEntryActivity>(renderer, mappedInput, tr(STR_CALIBRE_WEB_URL),
+    startActivityForResult(std::make_unique<KeyboardEntryActivity>(renderer, mappedInput, tr(STR_OPDS_SERVER_URL),
                                                                    SETTINGS.opdsServerUrl, 127, false),
                            [this](const ActivityResult& result) {
                              if (!result.isCancelled) {
@@ -88,17 +88,14 @@ void CalibreSettingsActivity::handleSelection() {
   }
 }
 
-void CalibreSettingsActivity::render(RenderLock&&) {
+void OpdsSettingsActivity::render(RenderLock&&) {
   renderer.clearScreen();
 
   const auto& metrics = UITheme::getInstance().getMetrics();
   const auto pageWidth = renderer.getScreenWidth();
   const auto pageHeight = renderer.getScreenHeight();
   GUI.drawHeader(renderer, Rect{0, metrics.topPadding, pageWidth, metrics.headerHeight}, tr(STR_OPDS_BROWSER));
-  GUI.drawSubHeader(renderer, Rect{0, metrics.topPadding + metrics.headerHeight, pageWidth, metrics.tabBarHeight},
-                    tr(STR_CALIBRE_URL_HINT));
-
-  const int contentTop = metrics.topPadding + metrics.headerHeight + metrics.verticalSpacing + metrics.tabBarHeight;
+  const int contentTop = metrics.topPadding + metrics.headerHeight + metrics.verticalSpacing;
   const int contentHeight = pageHeight - contentTop - metrics.buttonHintsHeight - metrics.verticalSpacing * 2;
   GUI.drawList(
       renderer, Rect{0, contentTop, pageWidth, contentHeight}, static_cast<int>(MENU_ITEMS),
