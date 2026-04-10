@@ -219,7 +219,21 @@ void ActivityManager::popActivity() {
 
 bool ActivityManager::preventAutoSleep() const { return currentActivity && currentActivity->preventAutoSleep(); }
 
-bool ActivityManager::isReaderActivity() const { return currentActivity && currentActivity->isReaderActivity(); }
+bool ActivityManager::isReaderActivity() const {
+  // Treat any reader-related sub-activity as "reader context" too.
+  // Example: chapter menu/percent selector are pushed on top of a reader activity.
+  if (currentActivity && currentActivity->isReaderActivity()) {
+    return true;
+  }
+
+  for (const auto& activity : stackActivities) {
+    if (activity && activity->isReaderActivity()) {
+      return true;
+    }
+  }
+
+  return false;
+}
 
 bool ActivityManager::skipLoopDelay() const { return currentActivity && currentActivity->skipLoopDelay(); }
 
