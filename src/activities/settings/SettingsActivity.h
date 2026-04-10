@@ -18,7 +18,6 @@ enum class SettingAction {
   OPDSBrowser,
   Network,
   ClearCache,
-  CheckForUpdates,
 };
 
 struct SettingInfo {
