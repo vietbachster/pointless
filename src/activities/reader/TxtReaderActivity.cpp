@@ -12,6 +12,7 @@
 #include "MappedInputManager.h"
 #include "ReaderUtils.h"
 #include "RecentBooksStore.h"
+#include "components/UITheme.h"
 #include "fontIds.h"
 
 namespace {
