@@ -32,10 +32,7 @@ void NetworkModeSelectionActivity::loop() {
 
   // Handle confirm button - select current option
   if (mappedInput.wasPressed(MappedInputManager::Button::Confirm)) {
-    NetworkMode mode = NetworkMode::JOIN_NETWORK;
-    if (selectedIndex == 1) {
-      mode = NetworkMode::CREATE_HOTSPOT;
-    }
+    NetworkMode mode = selectedIndex == 0 ? NetworkMode::CREATE_HOTSPOT : NetworkMode::JOIN_NETWORK;
     onModeSelected(mode);
     return;
   }
@@ -64,9 +61,9 @@ void NetworkModeSelectionActivity::render(RenderLock&&) {
   const int contentTop = metrics.topPadding + metrics.headerHeight + metrics.verticalSpacing;
   const int contentHeight = pageHeight - contentTop - metrics.buttonHintsHeight - metrics.verticalSpacing * 2;
   // Menu items and descriptions
-  static constexpr StrId menuItems[MENU_ITEM_COUNT] = {StrId::STR_JOIN_NETWORK, StrId::STR_CREATE_HOTSPOT};
-  static constexpr StrId menuDescs[MENU_ITEM_COUNT] = {StrId::STR_JOIN_DESC, StrId::STR_HOTSPOT_DESC};
-  static constexpr UIIcon menuIcons[MENU_ITEM_COUNT] = {UIIcon::Wifi, UIIcon::Hotspot};
+  static constexpr StrId menuItems[MENU_ITEM_COUNT] = {StrId::STR_CREATE_HOTSPOT, StrId::STR_JOIN_NETWORK};
+  static constexpr StrId menuDescs[MENU_ITEM_COUNT] = {StrId::STR_HOTSPOT_DESC, StrId::STR_JOIN_DESC};
+  static constexpr UIIcon menuIcons[MENU_ITEM_COUNT] = {UIIcon::Hotspot, UIIcon::Wifi};
 
   GUI.drawList(
       renderer, Rect{0, contentTop, pageWidth, contentHeight}, static_cast<int>(MENU_ITEM_COUNT), selectedIndex,
