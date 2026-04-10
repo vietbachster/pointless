@@ -14,7 +14,6 @@ Welcome to the **CrossPoint** firmware. This guide outlines the hardware control
     - [3.3 Browse Files Screen](#33-browse-files-screen)
     - [3.4 Recent Books Screen](#34-recent-books-screen)
     - [3.5 File Transfer Screen](#35-file-transfer-screen)
-      - [3.5.1 Calibre Wireless Transfers](#351-calibre-wireless-transfers)
     - [3.6 Settings](#36-settings)
       - [3.6.1 Display](#361-display)
       - [3.6.2 Reader](#362-reader)
@@ -98,18 +97,6 @@ See the [webserver docs](./docs/webserver.md) for more information on how to con
 
 > [!TIP]
 > Advanced users can also manage files programmatically or via the command line using `curl`. See the [webserver docs](./docs/webserver.md) for details.
-
-### 3.5.1 Calibre Wireless Transfers
-
-CrossPoint supports sending books from Calibre using the CrossPoint Reader device plugin.
-
-1. Install the plugin in Calibre:
-   - Head to https://github.com/crosspoint-reader/calibre-plugins/releases to download the latest version of the crosspoint_reader plugin.
-   - Download the zip file.
-   - Open Calibre → Preferences → Plugins → Load plugin from file → Select the zip file.
-2. On the device: File Transfer → Connect to Calibre → Join a network.
-3. Make sure your computer is on the same WiFi network.
-4. In Calibre, click "Send to device" to transfer books.
 
 ### 3.6 Settings
 

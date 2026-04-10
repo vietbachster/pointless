@@ -7,10 +7,10 @@
  * Submenu for OPDS Browser settings.
  * Shows OPDS Server URL and HTTP authentication options.
  */
-class CalibreSettingsActivity final : public Activity {
+class OpdsSettingsActivity final : public Activity {
  public:
-  explicit CalibreSettingsActivity(GfxRenderer& renderer, MappedInputManager& mappedInput)
-      : Activity("CalibreSettings", renderer, mappedInput) {}
+  explicit OpdsSettingsActivity(GfxRenderer& renderer, MappedInputManager& mappedInput)
+      : Activity("OpdsSettings", renderer, mappedInput) {}
 
   void onEnter() override;
   void onExit() override;

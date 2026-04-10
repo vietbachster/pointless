@@ -24,9 +24,9 @@ ButtonRemapActivity,Remap opened,Front hardware button,Short,Assign current logi
 KOReaderSettingsActivity,Menu opened,Back,Short,Exit activity
 KOReaderSettingsActivity,Menu opened,Confirm,Short,Open/edit selected KOReader setting
 KOReaderSettingsActivity,Menu opened,Up/Down,Short/Hold,Move menu selection
-CalibreSettingsActivity,Menu opened,Back,Short,Exit activity
-CalibreSettingsActivity,Menu opened,Confirm,Short,Open/edit selected OPDS credential field
-CalibreSettingsActivity,Menu opened,Up/Down,Short/Hold,Move menu selection
+OpdsSettingsActivity,Menu opened,Back,Short,Exit activity
+OpdsSettingsActivity,Menu opened,Confirm,Short,Open/edit selected OPDS credential field
+OpdsSettingsActivity,Menu opened,Up/Down,Short/Hold,Move menu selection
 StatusBarSettingsActivity,Menu opened,Back,Short,Exit activity
 StatusBarSettingsActivity,Menu opened,Confirm,Short,Toggle/cycle selected status bar option
 StatusBarSettingsActivity,Menu opened,Up/Down,Short/Hold,Move menu selection
@@ -57,7 +57,6 @@ WifiSelectionActivity,State FORGET_PROMPT,Confirm,Short,Apply choice and return 
 WifiSelectionActivity,State FORGET_PROMPT,Back,Short,Return to scan without forgetting
 WifiSelectionActivity,State CONNECTION_FAILED,Back or Confirm,Short,Open forget prompt or return network list depending context
 CrossPointWebServerActivity,Server running,Back,Short,Exit file transfer and go Home
-CalibreConnectActivity,Server running,Back,Short,Request exit and finish activity
 OpdsBookBrowserActivity,State ERROR,Confirm,Short,Retry fetch (or relaunch WiFi selection)
 OpdsBookBrowserActivity,State ERROR,Back,Short,Back to previous catalog or Home
 OpdsBookBrowserActivity,State CHECK_WIFI or LOADING,Back,Short,Back navigation
