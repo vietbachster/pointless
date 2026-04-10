@@ -1,0 +1,123 @@
+Page,Precondition,Button,PressType,ExpectedResult
+BootActivity,Device booting,None,N/A,Display logo and boot text only
+SleepActivity,Entering sleep mode,None,N/A,Render configured sleep screen only
+FullScreenMessageActivity,Error/info full screen shown,None,N/A,Display message only
+HomeActivity,Home opened,Up/Down,Short/Hold,Move selection through home menu
+HomeActivity,Home opened,Confirm,Short,Open selected item (book/browser/recents/OPDS/file transfer/settings)
+FileBrowserActivity,In subfolder,Back,Long >=1000ms,Jump to root folder '/'
+FileBrowserActivity,At any folder,Back,Short,Go parent folder or Home when already at root
+FileBrowserActivity,Item is directory,Confirm,Short,Enter selected directory
+FileBrowserActivity,Item is file,Confirm,Short,Open selected file in Reader router
+FileBrowserActivity,Item is file,Confirm,Long >=1000ms,Open delete confirmation dialog
+FileBrowserActivity,List has items,Up/Down,Short/Hold,Move selection and page-jump continuously
+RecentBooksActivity,Recent list non-empty,Confirm,Short,Open selected recent book
+RecentBooksActivity,Recent list opened,Back,Short,Return Home
+RecentBooksActivity,List opened,Up/Down,Short/Hold,Move selection and page-jump continuously
+SettingsActivity,At category header row,Confirm,Short,Cycle to next category
+SettingsActivity,At setting row,Confirm,Short,Toggle/cycle setting or open sub-activity action
+SettingsActivity,At setting row,Back,Short,Return cursor to category header row
+SettingsActivity,At category header row,Back,Short,Save settings and return Home
+SettingsActivity,Settings list opened,Up/Down,Short/Hold,Move item selection or switch category continuously
+ButtonRemapActivity,Remap opened,Up,Short,Reset front button mapping to defaults and exit
+ButtonRemapActivity,Remap opened,Down,Short,Cancel remap and exit without saving
+ButtonRemapActivity,Remap opened,Front hardware button,Short,Assign current logical role and advance remap step
+KOReaderSettingsActivity,Menu opened,Back,Short,Exit activity
+KOReaderSettingsActivity,Menu opened,Confirm,Short,Open/edit selected KOReader setting
+KOReaderSettingsActivity,Menu opened,Up/Down,Short/Hold,Move menu selection
+CalibreSettingsActivity,Menu opened,Back,Short,Exit activity
+CalibreSettingsActivity,Menu opened,Confirm,Short,Open/edit selected OPDS credential field
+CalibreSettingsActivity,Menu opened,Up/Down,Short/Hold,Move menu selection
+StatusBarSettingsActivity,Menu opened,Back,Short,Exit activity
+StatusBarSettingsActivity,Menu opened,Confirm,Short,Toggle/cycle selected status bar option
+StatusBarSettingsActivity,Menu opened,Up/Down,Short/Hold,Move menu selection
+LanguageSelectActivity,Language list opened,Back,Short,Cancel and return
+LanguageSelectActivity,Language list opened,Confirm,Short,Apply selected language and return
+LanguageSelectActivity,Language list opened,Up/Down,Short,Move language selection
+ClearCacheActivity,State WARNING,Confirm,Short,Start clearing reader cache
+ClearCacheActivity,State WARNING,Back,Short,Cancel and return
+ClearCacheActivity,State SUCCESS or FAILED,Back,Short,Return to previous settings screen
+OtaUpdateActivity,State WAITING_CONFIRMATION,Confirm,Short,Start OTA download/install
+OtaUpdateActivity,State WAITING_CONFIRMATION,Back,Short,Exit OTA activity
+OtaUpdateActivity,State FAILED or NO_UPDATE,Back,Short,Exit OTA activity
+KOReaderAuthActivity,State SUCCESS or FAILED,Back,Short,Exit auth screen
+KOReaderAuthActivity,State SUCCESS or FAILED,Confirm,Short,Exit auth screen
+NetworkModeSelectionActivity,Mode selection opened,Back,Short,Cancel mode selection and return
+NetworkModeSelectionActivity,Mode selection opened,Confirm,Short,Select highlighted mode
+NetworkModeSelectionActivity,Mode selection opened,Up/Down,Short/Hold,Move mode selection
+WifiSelectionActivity,State NETWORK_LIST,Back,Short,Cancel WiFi flow (return canceled)
+WifiSelectionActivity,State NETWORK_LIST,Confirm,Short,Connect selected network or rescan if list empty
+WifiSelectionActivity,State NETWORK_LIST,Right,Short,Start rescan
+WifiSelectionActivity,State NETWORK_LIST with saved credential,Left,Short,Open forget prompt
+WifiSelectionActivity,State NETWORK_LIST,Up/Down,Short/Hold,Move network selection
+WifiSelectionActivity,State SAVE_PROMPT,Up/Left/Down/Right,Short,Switch Yes/No selection
+WifiSelectionActivity,State SAVE_PROMPT,Confirm,Short,Confirm choice then complete success
+WifiSelectionActivity,State SAVE_PROMPT,Back,Short,Skip saving and complete success
+WifiSelectionActivity,State FORGET_PROMPT,Up/Left/Down/Right,Short,Switch Cancel/Forget selection
+WifiSelectionActivity,State FORGET_PROMPT,Confirm,Short,Apply choice and return to scan
+WifiSelectionActivity,State FORGET_PROMPT,Back,Short,Return to scan without forgetting
+WifiSelectionActivity,State CONNECTION_FAILED,Back or Confirm,Short,Open forget prompt or return network list depending context
+CrossPointWebServerActivity,Server running,Back,Short,Exit file transfer and go Home
+CalibreConnectActivity,Server running,Back,Short,Request exit and finish activity
+OpdsBookBrowserActivity,State ERROR,Confirm,Short,Retry fetch (or relaunch WiFi selection)
+OpdsBookBrowserActivity,State ERROR,Back,Short,Back to previous catalog or Home
+OpdsBookBrowserActivity,State CHECK_WIFI or LOADING,Back,Short,Back navigation
+OpdsBookBrowserActivity,State BROWSING entry type NAVIGATION,Confirm,Short,Open selected catalog entry
+OpdsBookBrowserActivity,State BROWSING entry type BOOK,Confirm,Short,Download selected book
+OpdsBookBrowserActivity,State BROWSING,Back,Short,Go previous catalog or Home at root
+OpdsBookBrowserActivity,State BROWSING,Up/Down,Short/Hold,Move selection and page-jump continuously
+ReaderActivity,Input path is EPUB,None,N/A,Replace with EpubReaderActivity
+ReaderActivity,Input path is XTC,None,N/A,Replace with XtcReaderActivity
+ReaderActivity,Input path is TXT/MD,None,N/A,Replace with TxtReaderActivity
+ReaderActivity,Input path is BMP,None,N/A,Replace with BmpViewerActivity
+EpubReaderActivity,Reading page,Confirm,Short,Open EpubReaderMenu
+EpubReaderActivity,Reading page,Back,Long >=1000ms,Open FileBrowser at current book folder
+EpubReaderActivity,Reading page,Back,Short,Go Home (or restore saved position when in footnote depth)
+EpubReaderActivity,Reading page,PageBack/Left,Short,Turn to previous page
+EpubReaderActivity,Reading page,PageForward/Right,Short,Turn to next page
+EpubReaderActivity,Reading page with short power page-turn enabled,Power,Short,Turn to next page
+EpubReaderActivity,Auto page turn active,Confirm or Back,Short,Disable auto page turn
+EpubReaderMenuActivity,Menu opened,Back,Short,Close menu with cancel result
+EpubReaderMenuActivity,Menu opened,Confirm on ROTATE_SCREEN,Short,Cycle pending orientation value
+EpubReaderMenuActivity,Menu opened,Confirm on AUTO_PAGE_TURN,Short,Cycle page-turn speed option
+EpubReaderMenuActivity,Menu opened,Confirm on other item,Short,Return selected action to reader
+EpubReaderMenuActivity,Menu opened,Up/Down,Short/Hold,Move menu selection
+EpubReaderChapterSelectionActivity,Chapter list opened,Back,Short,Cancel chapter selection
+EpubReaderChapterSelectionActivity,Chapter list opened,Confirm,Short,Select chapter and return spine index
+EpubReaderChapterSelectionActivity,Chapter list opened,Up/Down,Short/Hold,Move selection and page-jump continuously
+EpubReaderFootnotesActivity,Footnotes list opened,Back,Short,Cancel footnote picker
+EpubReaderFootnotesActivity,Footnotes list opened,Confirm,Short,Select footnote href and return
+EpubReaderFootnotesActivity,Footnotes list opened,Up/Down,Short/Hold,Move selected footnote
+EpubReaderPercentSelectionActivity,Percent picker opened,Back,Short,Cancel percent jump
+EpubReaderPercentSelectionActivity,Percent picker opened,Confirm,Short,Confirm selected percent jump
+EpubReaderPercentSelectionActivity,Percent picker opened,Left/Right,Short/Hold,Adjust percent by small step +/-1
+EpubReaderPercentSelectionActivity,Percent picker opened,Up/Down,Short/Hold,Adjust percent by large step +/-10
+KOReaderSyncActivity,State NO_CREDENTIALS/SYNC_FAILED/UPLOAD_COMPLETE,Back,Short,Cancel and close sync screen
+KOReaderSyncActivity,State SHOWING_RESULT,Back,Short,Cancel and close sync screen
+KOReaderSyncActivity,State SHOWING_RESULT,Confirm on Apply remote,Short,Return remote spine/page and close
+KOReaderSyncActivity,State SHOWING_RESULT,Confirm on Upload local,Short,Upload local progress
+KOReaderSyncActivity,State SHOWING_RESULT,Up/Down/Left/Right,Short,Toggle between 2 options
+KOReaderSyncActivity,State NO_REMOTE_PROGRESS,Confirm,Short,Upload local progress
+KOReaderSyncActivity,State NO_REMOTE_PROGRESS,Back,Short,Cancel and close
+TxtReaderActivity,Reading text,Back,Long >=1000ms,Open FileBrowser at current text folder
+TxtReaderActivity,Reading text,Back,Short,Go Home
+TxtReaderActivity,Reading text,PageBack/Left,Short,Previous page
+TxtReaderActivity,Reading text,PageForward/Right,Short,Next page or Home when at end
+XtcReaderActivity,Reading XTC,Confirm,Short,Open chapter selection
+XtcReaderActivity,Reading XTC,Back,Long >=1000ms,Open FileBrowser at current XTC folder
+XtcReaderActivity,Reading XTC,Back,Short,Go Home
+XtcReaderActivity,Reading XTC,PageBack/Left,Short,Previous page
+XtcReaderActivity,Reading XTC,PageForward/Right,Short,Next page (or Home at end)
+XtcReaderActivity,Reading XTC with short power page-turn enabled,Power,Short,Turn to next page
+XtcReaderChapterSelectionActivity,Chapter list opened,Back,Short,Cancel chapter selection
+XtcReaderChapterSelectionActivity,Chapter list opened,Confirm,Short,Select chapter start page and return
+XtcReaderChapterSelectionActivity,Chapter list opened,Up/Down,Short/Hold,Move selection and page-jump continuously
+QrDisplayActivity,QR shown,Back,Short,Close QR screen
+QrDisplayActivity,QR shown,Confirm,Short,Close QR screen
+KeyboardEntryActivity,Keyboard opened,Back,Short,Cancel input and return
+KeyboardEntryActivity,Keyboard opened,Confirm,Short,Press current key (char/action)
+KeyboardEntryActivity,Keyboard opened,Up/Down/Left/Right,Short/Hold,Move key cursor continuously
+ConfirmationActivity,Confirm dialog shown,Left,Short,Cancel action and return
+ConfirmationActivity,Confirm dialog shown,Right,Short,Confirm action and return
+Global Main Loop,Any activity,Power+Down combo,Hold,Take screenshot once per press cycle
+Global Main Loop,Any activity,Power,Long > configured duration,Enter deep sleep
+Global Buttons,All activities,Any,Double Click,No double-click behavior implemented
