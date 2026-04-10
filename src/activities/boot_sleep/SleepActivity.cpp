@@ -39,9 +39,9 @@ void SleepActivity::onEnter() {
 void SleepActivity::renderReaderBookmarkSleepScreen() const {
   const int pageWidth = renderer.getScreenWidth();
 
-  constexpr int bookmarkWidth = 36;
+  constexpr int bookmarkWidth = 37;
   constexpr int bookmarkHeight = 60;
-  constexpr int bookmarkRightOffset = 36;
+  constexpr int bookmarkRightOffset = 37;
   constexpr int notchDepth = 18;
   const int bookmarkX = pageWidth - bookmarkRightOffset - bookmarkWidth;
   constexpr int bookmarkY = 0;
